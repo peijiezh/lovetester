@@ -4,7 +4,7 @@ input two name, and output ramdon result
 A simple online game that calculates the compatibility between two people based on their names.
 
 ## How to Play
-
+visit https://www.love-tester.top/
 1. Enter two names in the input fields
 2. Click the "Calculate Match!" button
 3. View the compatibility score and a fun comment about the relationship
