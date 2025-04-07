@@ -3,25 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Match Game</title>
+    <title>Love Match Game - Test Your Compatibility Score | Love Tester</title>
+    <meta name="description" content="Discover your love compatibility with our free Love Match Game. Enter two names and get an instant compatibility score with personalized relationship insights.">
+    <meta name="keywords" content="love match, compatibility test, relationship test, love calculator, name compatibility">
+    <link rel="canonical" href="https://www.love-tester.top/">
+    <meta property="og:title" content="Love Match Game - Test Your Compatibility Score">
+    <meta property="og:description" content="Discover your love compatibility with our free Love Match Game. Enter two names and get an instant compatibility score.">
+    <meta property="og:url" content="https://www.love-tester.top/">
+    <meta property="og:type" content="website">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK81P8E8XQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NK81P8E8XQ');
+    </script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>💖 Love Match Game 💖</h1>
-        <p class="description">Enter two names to see how compatible they are!</p>
-        
-        <div class="input-container">
-            <input type="text" id="name1" placeholder="First name">
-            <input type="text" id="name2" placeholder="Second name">
-            <button id="calculate-btn">Calculate Match!</button>
+    <header>
+        <div class="header-content">
+            <h1>💖 Love Match Game 💖</h1>
+            <p class="tagline">Discover your true compatibility with our scientifically* inspired love calculator</p>
+            <p class="disclaimer">*Results are for entertainment purposes only</p>
         </div>
-        
-        <div class="result-container" id="result-container">
-            <div class="score-display" id="score-display"></div>
-            <p class="match-comment" id="match-comment"></p>
+    </header>
+
+    <main>
+        <section class="container">
+            <div class="game-section">
+                <h2>Test Your Love Compatibility</h2>
+                <p class="description">Enter two names below to reveal your compatibility score and relationship insights!</p>
+                
+                <div class="input-container">
+                    <input type="text" id="name1" placeholder="Your name" aria-label="First person's name">
+                    <div class="heart-divider">❤️</div>
+                    <input type="text" id="name2" placeholder="Their name" aria-label="Second person's name">
+                </div>
+                
+                <button id="calculate-btn">Calculate Match!</button>
+                
+                <div class="result-container" id="result-container">
+                    <h2>Your Love Match Results</h2>
+                    <div class="score-display" id="score-display"></div>
+                    <p class="match-comment" id="match-comment"></p>
+                    <button id="share-btn" class="share-btn">Share Results</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="container">
+                <h2>How Our Love Match Calculator Works</h2>
+                <p>Our unique algorithm analyzes the harmony between two names to determine compatibility. While the results are generated for fun, many users have found surprising insights about their relationships!</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <h3>Instant Results</h3>
+                        <p>Get your compatibility score in seconds - no waiting, no signup required.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Personalized Insights</h3>
+                        <p>Each score comes with a unique comment about your relationship potential.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Try Multiple Matches</h3>
+                        <p>Test compatibility with friends, crushes, celebrities, or potential partners!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <h3>Is this love calculator accurate?</h3>
+                    <p>Our love calculator is designed for entertainment purposes. While many users find the results amusing and sometimes surprisingly insightful, it's not based on psychological principles or scientific research.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Can I test compatibility between any two people?</h3>
+                    <p>Absolutely! You can test compatibility between friends, family members, celebrities, fictional characters, or potential romantic partners.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Will I get the same result if I test the same names again?</h3>
+                    <p>Yes! Our algorithm ensures that the same pair of names will always get the same compatibility score.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Does the order of names matter?</h3>
+                    <p>For the most accurate results, we recommend putting your name first and your partner's name second, though the difference is usually minimal.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="copyright">© 2025 Love-tester.top. All rights reserved.</p>
+            <p>For entertainment purposes only. Results should not be used to make important relationship decisions.</p>
+            <p><a href="mailto:support@love-tester.top">support@love-tester.top</a></p>
         </div>
-    </div>
+    </footer>
     
     <script src="script.js"></script>
 </body>

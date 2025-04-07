@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultContainer = document.getElementById('result-container');
     const scoreDisplay = document.getElementById('score-display');
     const matchComment = document.getElementById('match-comment');
+    const shareBtn = document.getElementById('share-btn');
     
     // Comments for different score ranges
     const comments = {
@@ -45,7 +46,76 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     };
     
-    calculateBtn.addEventListener('click', function() {
+    // Check URL parameters for pre-filled names
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('name1') && urlParams.has('name2')) {
+        name1Input.value = urlParams.get('name1');
+        name2Input.value = urlParams.get('name2');
+        // Auto-calculate if both names are provided in URL
+        if (name1Input.value && name2Input.value) {
+            calculateMatch();
+        }
+    }
+    
+    calculateBtn.addEventListener('click', calculateMatch);
+    
+    // Allow pressing Enter to calculate
+    name1Input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') calculateMatch();
+    });
+    
+    name2Input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') calculateMatch();
+    });
+    
+    // Share button functionality
+    shareBtn.addEventListener('click', function() {
+        const name1 = name1Input.value.trim();
+        const name2 = name2Input.value.trim();
+        const score = calculateMatchScore(name1, name2);
+        
+        // Create share URL
+        const shareUrl = `${window.location.origin}${window.location.pathname}?name1=${encodeURIComponent(name1)}&name2=${encodeURIComponent(name2)}`;
+        
+        // Create share text
+        const shareText = `I got a ${score}% love match with ${name2} on the Love Match Game! Try it yourself:`;
+        
+        // Try to use Web Share API if available
+        if (navigator.share) {
+            navigator.share({
+                title: 'Love Match Game Results',
+                text: shareText,
+                url: shareUrl
+            }).catch(err => {
+                console.log('Error sharing:', err);
+                fallbackShare();
+            });
+        } else {
+            fallbackShare();
+        }
+        
+        function fallbackShare() {
+            // Fallback to copying to clipboard
+            navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+                .then(() => {
+                    alert('Share link copied to clipboard!');
+                })
+                .catch(err => {
+                    console.log('Clipboard write failed:', err);
+                    prompt('Copy this link to share your results:', shareUrl);
+                });
+        }
+        
+        // Track share event
+        if (typeof gtag === 'function') {
+            gtag('event', 'share', {
+                'event_category': 'engagement',
+                'event_label': 'love_match_result'
+            });
+        }
+    });
+    
+    function calculateMatch() {
         // Get the names
         const name1 = name1Input.value.trim();
         const name2 = name2Input.value.trim();
@@ -67,12 +137,29 @@ document.addEventListener('DOMContentLoaded', function() {
         matchComment.textContent = comment;
         resultContainer.style.display = 'block';
         
+        // Scroll to results
+        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
         // Add some animation
         scoreDisplay.classList.add('pulse');
         setTimeout(() => {
             scoreDisplay.classList.remove('pulse');
         }, 1000);
-    });
+        
+        // Track result event
+        if (typeof gtag === 'function') {
+            gtag('event', 'calculate_match', {
+                'event_category': 'engagement',
+                'event_label': `${score}% match`
+            });
+        }
+        
+        // Update URL with parameters (without reloading page)
+        const url = new URL(window.location);
+        url.searchParams.set('name1', name1);
+        url.searchParams.set('name2', name2);
+        window.history.pushState({}, '', url);
+    }
     
     function calculateMatchScore(name1, name2) {
         // This creates a deterministic but seemingly random score based on the names
